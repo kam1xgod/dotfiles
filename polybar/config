@@ -38,11 +38,11 @@ alert = #a4b3b6
 
 [bar/nav_bar]
 monitor = ${env:MONITOR:eDP}
-width = 11.5%
+width = 100%
 height = 32
-offset-x = 0.5%
+offset-x = 0%
 ;offset-y = 1%
-radius = 10.0
+radius = 0.0
 fixed-center = true
 
 background = ${colors.background}
@@ -55,7 +55,7 @@ border-size = 0
 border-color = #00000000
 
 padding-left = 2
-padding-right = 3 
+padding-right = 20 
 
 module-margin-left = 2
 module-margin-right = 2
@@ -66,66 +66,8 @@ font-0 = "Open Sans:style=SemiBold:pixelsize=14;1"
 font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
 font-2 = "Font Awesome 5 Brands:pixelsize=10;1"
 
-modules-left = bspwm
-
-;tray-position = right
-;tray-padding = 2
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-;           _     _     _ _        _                
-;          (_)   | |   | | |      | |               
-; _ __ ___  _  __| | __| | | ___  | |__   __ _ _ __ 
-;| '_ ` _ \| |/ _` |/ _` | |/ _ \ | '_ \ / _` | '__|
-;| | | | | | | (_| | (_| | |  __/ | |_) | (_| | |   
-;|_| |_| |_|_|\__,_|\__,_|_|\___| |_.__/ \__,_|_|   
-;                             ______                
-;                            |______|               
-
-[bar/tray_bar]
-monitor = ${env:MONITOR:eDP}
-width = 10%
-height = 32
-offset-x = 45%
-;offset-y = 1%
-radius = 10.0
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-;line-color = #a4b3b6
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 2
-padding-right = 3 
-
-module-margin-left = 2
-module-margin-right = 2
-
-;font-0 = fixed:pixelsize=10;1
-;font-2 = siji:pixelsize=12;1
-font-0 = "Rostov:style=Regular:pixelsize=12;1"
-font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
-font-2 = "Font Awesome 5 Brands:pixelsize=10;1"
-
-modules-left = date
+modules-left = bspwm xwindow
+modules-right = filesystem pulseaudio xkeyboard memory cpu wlan battery date
 
 tray-position = right
 tray-padding = 2
@@ -147,64 +89,7 @@ tray-detached = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-
-;  __                    _                
-; / _|                  | |               
-;| |_ _   _ _ __   ___  | |__   __ _ _ __ 
-;|  _| | | | '_ \ / __| | '_ \ / _` | '__|
-;| | | |_| | | | | (__  | |_) | (_| | |   
-;|_|  \__,_|_| |_|\___| |_.__/ \__,_|_|   
-;                   ______                
-;                  |______|               
-
-[bar/func_bar]
-monitor = ${env:MONITOR:eDP}
-width = 24%
-height = 32
-offset-x = 75.5%
-;offset-y = 1%
-radius = 10.0
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #a4b3b6
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 3
-padding-right = 4 
-
-module-margin-left = 1
-module-margin-right = 2
-
-;font-0 = fixed:pixelsize=10;1
-font-0 = "Rostov:style=Regular:pixelsize=12;1"
-;font-0 = siji:pixelsize=10;1
-font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
-
-modules-right = filesystem pulseaudio xkeyboard memory cpu wlan battery 
-
-;tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-
-cursor-click = pointer
-cursor-scroll = ns-resize
+######################################################################################
 
 ;                _           _               
 ;               (_)         | |              
@@ -215,7 +100,9 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:50:...%
+
+######################################################################################
 
 ;      _              _                         _ 
 ;     | |            | |                       | |
@@ -242,6 +129,8 @@ label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
 
+######################################################################################
+
 ;  __ _ _                     _                 
 ; / _(_) |                   | |                
 ;| |_ _| | ___  ___ _   _ ___| |_ ___ _ __ ___  
@@ -260,6 +149,8 @@ mount-0 = /
 label-mounted = %{F#ebe8e7}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+
+######################################################################################
 
 ; _                                 
 ;| |                                
@@ -303,6 +194,8 @@ label-empty-padding = 2
 ; Separator in between workspaces
 label-separator = |
 
+######################################################################################
+
 ;      _                _    _ _       _     _   
 ;     | |              | |  | (_)     | |   | |  
 ;__  _| |__   __ _  ___| | _| |_  __ _| |__ | |_ 
@@ -329,6 +222,8 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
+######################################################################################
+
 ; _                _    _ _       _     _                     _ 
 ;| |              | |  | (_)     | |   | |                   (_)
 ;| |__   __ _  ___| | _| |_  __ _| |__ | |_   __ _  ___ _ __  _ 
@@ -342,6 +237,8 @@ bar-empty-foreground = ${colors.foreground-alt}
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
+
+######################################################################################
 
 ;  ___ _ __  _   _ 
 ; / __| '_ \| | | |
@@ -358,6 +255,8 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.secondary}
 label = %percentage:2%%
                                            
+######################################################################################
+
 ; _ __ ___   ___ _ __ ___   ___  _ __ _   _ 
 ;| '_ ` _ \ / _ \ '_ ` _ \ / _ \| '__| | | |
 ;| | | | | |  __/ | | | | | (_) | |  | |_| |
@@ -372,6 +271,8 @@ format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.secondary}
 label = %percentage_used%%
+
+######################################################################################
 
 ;          _             
 ;         | |            
@@ -402,6 +303,8 @@ ramp-signal-3 = "mid+"
 ramp-signal-4 = "high"
 ramp-signal-foreground = ${colors.foreground-alt}
 
+######################################################################################
+
 ;     _       _       
 ;    | |     | |      
 ;  __| | __ _| |_ ___ 
@@ -424,6 +327,8 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.secondary}
 
 label = %date% %time%
+
+######################################################################################
 
 ;             _                          _ _       
 ;            | |                        | (_)      
@@ -448,6 +353,8 @@ bar-volume-width = 12
 bar-volume-indicator = 
 bar-volume-fill = 
 bar-volume-empty = 
+
+######################################################################################
 
 ; _           _   _                  
 ;| |         | | | |                 
@@ -491,6 +398,8 @@ animation-discharging-2 = 
 animation-discharging-foreground = ${colors.foreground-alt}
 animation-discharging-framerate = 750
                                                          
+######################################################################################
+
 ; _ __   _____      _____ _ __ _ __ ___   ___ _ __  _   _ 
 ;| '_ \ / _ \ \ /\ / / _ \ '__| '_ ` _ \ / _ \ '_ \| | | |
 ;| |_) | (_) \ V  V /  __/ |  | | | | | |  __/ | | | |_| |
@@ -526,6 +435,8 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+######################################################################################
 
 ;          _   _   _                 
 ;         | | | | (_)                
