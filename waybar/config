@@ -1,0 +1,189 @@
+// =============================================================================
+//
+// Waybar configuration (https://hg.sr.ht/~begs/dotfiles)
+//
+// Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
+//
+// =============================================================================
+
+{
+	// -------------------------------------------------------------------------
+	// Global configuration
+	// -------------------------------------------------------------------------
+
+	"layer": "top",
+	"position": "top",
+	"height": 24,
+
+	"modules-left": [
+		"sway/workspaces", // actually, workspaces.
+		"custom/spotify", // custom module, but it doesn't work. 
+		"sway/window", // name of current window.
+		"sway/mode" // ex: resize.
+	],
+
+	"modules-right": [
+		"pulseaudio",
+		"network",
+		"memory", // delete?
+		"cpu", // delete?
+		"sway/language",
+		"battery",
+		"tray",
+		"clock#date",
+		"clock#time",
+		"custom/quit" // custom module for quiting sway. should i do shutdown now instead?
+	],
+
+	// -------------------------------------------------------------------------
+	// Modules (alphabetical)
+	// -------------------------------------------------------------------------
+
+	// maybe add some storage module..?
+
+	"battery": {
+		"interval": 1,
+		"states": {
+			// "good": 95,
+			"warning": 20,
+			"critical": 10
+		},
+		"format": "[ {icon} {capacity}% ]",
+		
+		"format-charging": "[  {capacity}% ({time}) ]",
+		"format-plugged":  "[ {icon}  {capacity}% ]",
+//		"format-good": "", // An empty format will hide the module
+		"format-discharging": "[ {icon} {capacity}% ({time}) ]",
+		"format-icons": ["", "", "", "", ""]		
+	},
+
+	"clock#time": {
+		"interval": 10,
+		"format": "[ {:%H:%M} ]",
+		"tooltip": false
+	},
+
+	"clock#date": {
+		"interval": 20,
+		"format": "[ {:%e %b %Y} ]",
+		//"tooltip-format": "{:%e %B %Y}"
+		"tooltip": false
+	},
+
+	"cpu": {
+		"interval": 5,
+		"tooltip": false,
+		"format": "[  {usage}% ]",
+		"states": {
+		  "warning": 70,
+		  "critical": 90
+		}
+	},
+
+	"sway/language": {
+		"format": "[  {} ]",
+        	"exec": "swaymsg -mrt subscribe '[\"input\"]' | jq -r --unbuffered \"select(.change == \\\"xkb_layout\\\") | .input | select(.type == \\\"keyboard\\\") | .xkb_active_layout_name | .[0:2]\"",
+		"tooltip": "false"
+	},
+
+	"memory": {
+		"interval": 5,
+		"format": "[  {}% ]",
+		"states": {
+			"warning": 70,
+			"critical": 90
+		}
+	},
+
+	"sway/mode": {
+		"format": "<span style=\"italic\"> {}</span>",
+		"tooltip": false
+	},
+
+	"network": {
+		"interval": 5,
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "[  {essid} ]" ,
+		"format-ethernet": "[ {ifname}: {ipaddr}/{cidr}  ]",
+		"format-linked": "[ {ifname} (No IP)  ]",
+		"format-disconnected": "[   ]",
+		"format-alt": "[ {signalStrength}% ⬇{bandwidthDownBits} ⬆{bandwidthUpBits} ]",
+		"interval": 60,
+		"tooltip-format": "{ifname}  {ipaddr}"
+	},
+
+	"custom/spotify": {
+		"format": "[ {} ]",
+		"interval": 1,
+		"return-type": "json",
+		"exec": "~/.config/waybar/spotify.sh",
+		"exec-if": "pgrep spotify",
+		"escape": true
+	},
+
+	"pulseaudio": {
+		"scroll-step": 1,
+		"format": "[ {icon} {volume}% ]",
+		"format-bluetooth": "[ {icon} {volume}% ]",
+		"format-muted": "[  ]",
+		"format-icons": {
+			"headphones": "",
+			"handsfree": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", ""]
+		},
+		"on-click": "pavucontrol"
+	},
+
+	"tray": {
+		"icon-size": 21
+		//"spacing": 10
+	},
+	
+	"sway/window": {
+		"format": "[ {} ]",
+		"max-length": 30,
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+        	"all-outputs": true,
+		"persistent_workspaces": {
+			"1":[],
+			"2":[],
+			"3":[],
+			"4":[],
+			"5":[],
+			"6":[],
+			"7":[],
+			"8":[],
+			"9":[],
+			"10":[]
+		},
+        	"format": "{icon}",
+        	"format-icons": {
+            		"1": "",
+            		"2": "",
+            		"3": "",
+            		"4": "",
+            		"5": "",
+            		"6": "",
+			"7": "",
+			"8": "",
+            		"urgent": "",
+            		"focused": "",
+            		"default": ""
+        }
+	},
+
+	"custom/quit": {
+		"interval": 1,
+		"format": "[  ]",
+		"on-click": "swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'",
+		"tooltip": false
+	}
+}
