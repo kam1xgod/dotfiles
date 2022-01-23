@@ -8,14 +8,13 @@ set $right l
 set $term kitty
 set $menu wofi --show run
 # set $wifi 
-set $screenshot grim ~/Pictures/screenshots/scr-$(date +"%Y-%m-%d-%H-%M-%S").png
 set $background '~/Insync/wtfomgohohoh@gmail.com/Google Drive/wallpapers/eva.jpg'
 
 ### Output configuration
 output * bg $background fill
 
 # Font
-font pango:SourceCodePro Medium 18
+font pango:Iosevka Medium 18
 
 # Window borders
 default_border none
@@ -26,6 +25,30 @@ hide_edge_borders smart
 smart_gaps on
 gaps outer 10
 gaps inner 10
+
+# Set workspaces
+set $ws1   1
+set $ws2   2
+set $ws3   3
+set $ws4   4
+set $ws5   5
+set $ws6   6
+set $ws7   7
+set $ws8   8
+set $ws9   9
+set $ws0   10
+set $wsF1  11
+set $wsF2  12
+set $wsF3  13
+set $wsF4  14
+set $wsF5  15
+set $wsF6  16
+set $wsF7  17
+set $wsF8  18
+set $wsF9  19
+set $wsF10 20
+set $wsF11 21
+set $wsF12 22
 
 # assign some apps to workspaces
 assign [class="Firefox"] 1
@@ -75,7 +98,6 @@ assign [class="discord"] 8
 #
     bindsym $mod+Return exec $term
     bindsym --to-code $mod+d exec $menu
-    bindsym $mod+Print exec $screenshot
 
     bindsym --to-code $mod+Shift+q kill
     bindsym --to-code $mod+Shift+c reload
@@ -135,6 +157,14 @@ assign [class="discord"] 8
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    bindsym $mod+F1 workspace $wsF1
+    bindsym $mod+F2 workspace $wsF2
+    bindsym $mod+F3 workspace $wsF3
+    bindsym $mod+F4 workspace $wsF4
+    bindsym $mod+F5 workspace $wsF5
+    bindsym $mod+F6 workspace $wsF6
+    bindsym $mod+F7 workspace $wsF7
+    bindsym $mod+F8 workspace $wsF8    
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -154,13 +184,14 @@ assign [class="discord"] 8
 #
 
 	# exec apps at start
-	exec swaymsg "workspace 8; exec discord;"
+	exec swaymsg "workspace 8; exec telegram-desktop;"
 	exec swaymsg "workspace 2; exec emacs;"
 	exec swaymsg "workspace 5; exec spotify;"
 	exec swaynsg "workspace 7; exec insync start;"
-	exec swaymsg "workspace 8; exec telegram-desktop;"
 	exec swaymsg "workspace 3; exec kitty;"
 
+	# brightness, cuz my laptop have some troubles with it.
+	exec brightnessctl set 50%
 #
 # Layout stuff:
 #
@@ -219,26 +250,47 @@ assign [class="discord"] 8
     	     # Return to default mode
     	     bindsym Return mode "default"
     	     bindsym Escape mode "default"
+	     bindsym --to-code $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym --to-code $mod+r mode "resize"
 
     #
     # System mode: 
     #
-	set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
-    	mode "$mode_system" {
-    	     bindsym --to-code l exec $lock, mode "default"
-	     bindsym --to-code e exit
+    set $mode_system System: (s) suspend, (r) reboot, (S) shutdown
+    mode "$mode_system" {
 	     bindsym --to-code s exec --no-startup-id systemctl suspend, mode "default"
 	     bindsym --to-code r exec --no-startup-id systemct reboot, mode "default"
 	     bindsym --to-code Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-	     bindsym --to-code Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
 
 	     # return to default mode
 	     bindsym Return mode "default"
 	     bindsym Escape mode "default"
-	}
-    	bindsym --to-code $mod+Shift+e mode "$mode_system"
+	     bindsym --to-code $mod+Shift+e mode "default"
+	     }
+
+	     bindsym --to-code $mod+Shift+e mode "$mode_system"
+
+
+    #
+    # Screen capture
+    #
+    set $mode_screenshot Screenshot: 1 file (s), 2 file (w), 3 cp (s), 4 cp (w), 5 swappy
+    mode "$mode_screenshot" {
+    	 bindsym 1 exec 'grim -g "$(slurp)" ~/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
+    	 bindsym 2 exec 'grim ~/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
+    	 bindsym 3 exec 'grim -g "$(slurp)" - | wl-copy', mode "default"
+    	 bindsym 4 exec 'grim - | wl-copy', mode "default"
+    	 bindsym 5 exec 'grim -g "$(slurp)" - | swappy -f -', mode "default"
+
+	 # back to normal: Enter or Escape
+    	 bindsym Return mode "default"
+	 bindsym Escape mode "default"
+    	 bindsym $mod+Print mode "default"
+	 }
+
+	bindsym --to-code $mod+Print mode "$mode_screenshot"
+
 #
 # Status Bar:
 #

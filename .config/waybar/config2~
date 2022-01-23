@@ -25,8 +25,8 @@
 	"modules-right": [
 		"pulseaudio",
 		"network",
-		"memory", // delete?
-		"cpu", // delete?
+		// "memory", // delete?
+		// "cpu", // delete?
 		"sway/language",
 		"battery",
 		"tray",
@@ -113,12 +113,18 @@
 	},
 
 	"custom/spotify": {
-		"format": "[ {} ]",
-		"interval": 1,
+		"format": "[  {} ]",
+		"escape": true,
 		"return-type": "json",
-		"exec": "~/.config/waybar/spotify.sh",
-		"exec-if": "pgrep spotify",
-		"escape": true
+		"max-length": 40,
+		// "interval": 30, // Remove this if your script is endless and write in loop
+		"on-click": "playerctl -p spotify play-pause",
+		"on-click-right": "killall spotify",
+		"smooth-scrolling-threshold": 10,
+		"on-scroll-up" : "playerctl -p spotify next",
+		"on-scroll-down" : "playerctl -p spotify previous",
+		"exec":"python3 ~/.config/waybar/spotify.py",
+		"exec-if": "pgrep spotify"
 	},
 
 	"pulseaudio": {

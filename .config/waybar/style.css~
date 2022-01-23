@@ -60,9 +60,9 @@
 /* Eva */
 @define-color light #A180FF;
 @define-color dark #2D1B35;
-@define-color warning #fabd2f;
-@define-color critical #cc241d;
-@define-color mode #a89984;
+@define-color warning #FABD2F;
+@define-color critical #CC241D;
+@define-color mode #A89984;
 @define-color workspaces #1EB3F6;
 @define-color workspacesfocused #A956E5;
 @define-color sound #8667CD;

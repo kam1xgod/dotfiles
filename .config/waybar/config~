@@ -1,0 +1,255 @@
+// =============================================================================
+//
+// Waybar configuration (https://hg.sr.ht/~begs/dotfiles)
+//
+// Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
+//
+// =============================================================================
+
+[{
+	// -------------------------------------------------------------------------
+	// Global configuration
+	// -------------------------------------------------------------------------
+
+	"layer": "top",
+	"output": "eDP-1",
+	"position": "top",
+	"height": 24,
+
+	"modules-left": [
+		"sway/workspaces", // actually, workspaces.
+		"sway/mode" // ex: resize.
+	],
+
+	"modules-center": [
+	        "custom/spotify" // custom module, but it doesn't work.
+	],
+
+	"modules-right": [
+		"sway/language",
+		"battery",
+		"clock#date",
+		"clock#time",
+		"custom/quit" // custom module for quiting sway. should i do shutdown now instead?
+	],
+
+	// -------------------------------------------------------------------------
+	// Modules (alphabetical)
+	// -------------------------------------------------------------------------
+
+	// maybe add some storage module..?
+
+	"battery": {
+		"interval": 1,
+		"states": {
+			// "good": 95,
+			"warning": 20,
+			"critical": 10
+		},
+		"format": "[ {icon} {capacity}% ]",
+		
+		"format-charging": "[  {capacity}% ({time}) ]",
+		"format-plugged":  "[ {icon}  {capacity}% ]",
+//		"format-good": "", // An empty format will hide the module
+		"format-discharging": "[ {icon} {capacity}% ({time}) ]",
+		"format-icons": ["", "", "", "", ""]		
+	},
+
+	"clock#time": {
+		"interval": 10,
+		"format": "[ {:%H:%M} ]",
+		"tooltip": false
+	},
+
+	"clock#date": {
+		"interval": 20,
+		"format": "[ {:%e %b %Y} ]",
+		//"tooltip-format": "{:%e %B %Y}"
+		"tooltip": false
+	},
+
+	"sway/language": {
+		"format": "[  {} ]",
+        	"exec": "swaymsg -mrt subscribe '[\"input\"]' | jq -r --unbuffered \"select(.change == \\\"xkb_layout\\\") | .input | select(.type == \\\"keyboard\\\") | .xkb_active_layout_name | .[0:2]\"",
+		"tooltip": "false"
+	},
+
+	"sway/mode": {
+		"format": "<span style=\"italic\"> {}</span>",
+		"tooltip": false
+	},
+	
+	"custom/spotify": {
+		"format": "[  {} ]",
+		"escape": true,
+		"return-type": "json",
+		"max-length": 40,
+		// "interval": 30, // Remove this if your script is endless and write in loop
+		"on-click": "playerctl -p spotify play-pause",
+		"on-click-right": "killall spotify",
+		"smooth-scrolling-threshold": 10,
+		"on-scroll-up" : "playerctl -p spotify next",
+		"on-scroll-down" : "playerctl -p spotify previous",
+		"exec":"python3 ~/.config/waybar/spotify.py",
+		"exec-if": "pgrep spotify"
+	},
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+        	"all-outputs": true,
+		"persistent_workspaces": {
+			"1":[],
+			"2":[],
+			"3":[],
+			"4":[],
+			"5":[],
+			"6":[],
+			"7":[],
+			"8":[],
+			"9":[],
+			"10":[],
+			"11":[],
+			"12":[],
+			"13":[],
+			"14":[],
+			"15":[],
+			"16":[],
+			"17":[],
+			"18":[]			
+		},
+        	"format": "{icon}",
+        	"format-icons": {
+            		"1": "",
+            		"2": "",
+            		"3": "",
+            		"4": "",
+            		"5": "",
+            		"6": "",
+			"7": "",
+			"8": "",
+			"9": "",
+			"10": "",
+			"11": "",
+			"12": "",
+			"13": "",
+			"14": "",
+			"15": "",
+			"16": "",
+			"17": "",
+			"18": "",
+            		"urgent": "",
+            		"focused": "",
+            		"default": ""
+        }
+	},
+
+	"custom/quit": {
+		"interval": 1,
+		"format": "[  ]",
+		"on-click": "swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'",
+		"tooltip": false
+	}
+}, {
+	"layer": "top",
+	"output": "eDP-1",
+	"position": "bottom",
+	"height": 24,
+
+	"modules-left": [
+		"disk",
+		"backlight",
+		"custom/pacman"
+	],
+
+	"modules-center": [
+		"sway/window" // name of current window.	
+	],
+
+	"modules-right": [
+		"tray",
+		"pulseaudio",
+		"network",
+		"memory",
+		"cpu"
+	],
+
+	"sway/window": {
+		"format": "[ {} ]",
+		"max-length": 30,
+		"tooltip": false
+	},
+
+	"backlight": {
+	        "device": "intel_backlight",
+    		"format": "[ {percent}% {icon} ]",
+    		"format-icons": ["", ""]
+	},
+
+	"cpu": {
+		"interval": 5,
+		"tooltip": false,
+		"format": "[  {usage}% ]",
+		"states": {
+		  "warning": 70,
+		  "critical": 90
+		}
+	},
+
+	"disk": {
+    		"interval": 30,
+    		"format": "[ {percentage_used}% - {path} ]",
+    		"path": "/"
+	},
+
+	"memory": {
+		"interval": 5,
+		"format": "[  {}% ]",
+		"states": {
+			"warning": 70,
+			"critical": 90
+		}
+	},
+
+	"network": {
+		"interval": 5,
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "[  {essid} ]" ,
+		"format-ethernet": "[ {ifname}: {ipaddr}/{cidr}  ]",
+		"format-linked": "[ {ifname} (No IP)  ]",
+		"format-disconnected": "[   ]",
+		"format-alt": "[ {signalStrength}% ⬇{bandwidthDownBits} ⬆{bandwidthUpBits} ]",
+		"interval": 60,
+		"tooltip-format": "{ifname}  {ipaddr}"
+	},
+
+	"pulseaudio": {
+		"scroll-step": 1,
+		"format": "[ {icon} {volume}% ]",
+		"format-bluetooth": "[ {icon} {volume}% ]",
+		"format-muted": "[  ]",
+		"format-icons": {
+			"headphones": "",
+			"handsfree": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", ""]
+		},
+		"on-click": "pavucontrol"
+	},
+
+	"tray": {
+		"icon-size": 21
+		//"spacing": 10
+	},
+
+	"custom/pacman": {
+    		"format": "[ {}   ]",
+		"interval": 3600,                     // every hour
+		"exec": "checkupdates | wc -l",       // # of updates
+		"exec-if": "exit 0",                  // always run; consider advanced run conditions
+		"on-click": "termite -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
+		"signal": 8
+	}
+}]
