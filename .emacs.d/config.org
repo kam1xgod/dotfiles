@@ -8,43 +8,6 @@ I will organise it better, I promise...
      (ido-mode 1)
      (global-set-key (kbd "C-x C-b") 'ido-switch-buffer) ;;; bind switch buffer to C-x C-b
    #+end_src
-** (f) always kill current buffer
-   #+begin_src emacs-lisp
-     (defun kill-cur-buf ()
-       (interactive)
-       (kill-buffer (current-buffer)))
-     (global-set-key (kbd "C-x k") 'kill-cur-buf)
-   #+end_src
-** (f) config edit
-   #+begin_src emacs-lisp
-     (defun config-visit ()
-       (interactive)
-       (find-file "~/.emacs.d/config.org"))
-     (global-set-key (kbd "C-c e") 'config-visit)
-   #+end_src
-** (f) config reload 
-   #+begin_src emacs-lisp
-     (defun config-reload ()
-       (interactive)
-       (org-babel-load-file (expand-file-name "~/.emacs.d/config.org")))
-     (global-set-key (kbd "C-c r") 'config-reload)
-   #+end_src
-** (f) window splitting
-   #+begin_src emacs-lisp
-     (defun split-and-follow-horizontally ()
-       (interactive)
-       (split-window-below)
-       (balance-windows)
-       (other-window 1))
-     (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
-
-     (defun split-and-follow-vertically ()
-       (interactive)
-       (split-window-right)
-       (balance-windows)
-       (other-window 1))
-     (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
-   #+end_src
 ** subword
    with camelCase it will move backwards to one word, not entire string. 
    #+begin_src emacs-lisp
@@ -70,9 +33,12 @@ I will organise it better, I promise...
   (global-set-key (kbd "C-M-u") 'universal-argument)
 #+end_src
 ** Trasnparent Emacs window?
+
+Well... Idk why but this doesn't work in sway.
+
 #+begin_src emacs-lisp
   (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-  (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+    (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 #+end_src
 
 * Basic Configuration
@@ -82,7 +48,7 @@ I will organise it better, I promise...
    #+begin_src emacs-lisp
 
      (tool-bar-mode -1) ;;; disable tool-bar
-     (menu-bar-mode 1) ;;; enable menu-bar
+     (menu-bar-mode -1) ;;; enable menu-bar
      (scroll-bar-mode -1) ;;; disable scroll-bar
 
    #+end_src
@@ -217,13 +183,12 @@ Also changed logo, footer and title.
        :ensure t
        :config
        (dashboard-setup-startup-hook)
-       (setq dashboard-items '((recents  . 5)
-                             (bookmarks . 5)
-                             (projects . 5)
-                             (agenda . 5)
-                             (registers . 5))) ;;; configuring which sections to display on dashboard and how much elements should be in it.
+       (setq dashboard-items '((recents  . 3)
+                               (bookmarks . 5)
+                               (projects . 10)
+                               (agenda . 5))) ;;; configuring which sections to display on dashboard and how much elements should be in it.
        (setq dashboard-banner-logo-title "Are you going to code something or you just looking?") ;;; text that will appear on startup.
-       (setq dashboard-startup-banner "/home/kami/Insync/wtfomgohohoh@gmail.com/Google Drive/pfps/Anime-Girl-Pfp-PNG-Photo-Image.png")) ;;; banner image.
+       (setq dashboard-startup-banner "/home/kami/Pictures/pfps/Anime-Girl-Pfp-PNG-Photo-Image.png")) ;;; banner image.
 
      (dashboard-modify-heading-icons '((recents . "file-text") ;;; i guess, it should add icons...
                                        (bookmarks . "book")))
@@ -237,7 +202,6 @@ Also changed logo, footer and title.
                                                         :height 1.1
                                                         :v-adjust -0.05
                                                         :face 'font-lock-keyword-face))
-
    #+end_src
 ** Terminal (will change it)
 
@@ -319,56 +283,109 @@ Evil - Extensible VI Layer for Emacs. Basically, we can use Vi(m)'s keybingings 
    
 ** Org-mode
 
-   #+begin_src emacs-lisp
+Some UI changes.
 
-     ;; Set the fixed pitch face
-     (set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 100)
+#+begin_src emacs-lisp
 
-     ;; Set the variable pitch face
-     (set-face-attribute 'variable-pitch nil :font "Source Code Pro" :height 100)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 150)
 
-     (defun efs/org-mode-setup ()
-       (org-indent-mode)
-       (variable-pitch-mode 1)
-       (visual-line-mode 1))
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "Source Code Pro" :height 150)
 
-     (defun efs/org-font-setup ()
-       ;; Replace list hyphen with dot
-       (font-lock-add-keywords 'org-mode
-                               '(("^ *\\([-]\\) "
-                                  (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
-     (use-package org
-       :ensure t
-       :hook (org-mode . efs/org-mode-setup)
-       :config
-       (setq org-ellipsis " ▾"
-             org-hide-emphasis-markers t)
-       (efs/org-font-setup))
+  (defun efs/org-mode-setup ()
+    (org-indent-mode)
+    (variable-pitch-mode 1)
+    (visual-line-mode 1))
 
-     (use-package org-bullets
-       :ensure t
-       :hook (org-mode . org-bullets-mode)
-       :custom
-       (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (defun efs/org-font-setup ()
+    ;; Replace list hyphen with dot
+    (font-lock-add-keywords 'org-mode
+                            '(("^ *\\([-]\\) "
+                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
+#+end_src
 
-       ;; Set faces for heading levels
-       (dolist (face '((org-level-1 . 1.2)
-                       (org-level-2 . 1.1)
-                       (org-level-3 . 1.05)
-                       (org-level-4 . 1.0)
-                       (org-level-5 . 1.1)
-                       (org-level-6 . 1.1)
-                       (org-level-7 . 1.1)
-                       (org-level-8 . 1.1)))
-         (set-face-attribute (car face) nil :font "Source Code Pro" :weight 'regular :height (cdr face)))
+The org-mode itself.
 
-     ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-     (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-     (set-face-attribute 'org-code nil   :inherit '(fixed-pitch))
-     (set-face-attribute 'org-table nil   :inherit '(fixed-pitch))
-     (set-face-attribute 'org-verbatim nil :inherit '(fixed-pitch))
-     (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-     (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+#+begin_src emacs-lisp
+
+    (use-package org
+      :ensure t
+      :hook (org-mode . efs/org-mode-setup)
+      :config
+      (setq org-ellipsis " ▾"
+            org-hide-emphasis-markers t)
+      (setq org-agenda-start-with-log-mode t)
+      (setq org-log-done 'time)
+      (setq org-log-into-drawer t)
+      (setq org-agenda-files
+            '("~/OrgFiles/tasks.org"
+              "~/OrgFiles/projects.org"
+              "~/OrgFiles/someday.org"
+              "~/OrgFiles/Habit.org"))
+      (efs/org-font-setup))
+
+    (require 'org-habit)
+    (add-to-list 'org-modules 'org-habit t)
+    (setq org-habit-show-all-today t)
+
+#+end_src
+
+Org-bullets and heading's style.
+
+#+begin_src emacs-lisp
+ 
+  (use-package org-bullets
+    :ensure t
+    :hook (org-mode . org-bullets-mode)
+    :custom
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+    ;; Set faces for heading levels
+    (dolist (face '((org-level-1 . 1.2)
+                    (org-level-2 . 1.1)
+                    (org-level-3 . 1.05)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :font "Source Code Pro" :weight 'regular :height (cdr face)))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(fixed-pitch))
+  (set-face-attribute 'org-table nil   :inherit '(fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+
+#+end_src
+
+Org-mode task states.
+
+#+begin_src emacs-lisp
+
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w)" "HOLD(h)" "|" "CANCELLED(c)")
+                (sequence "PROJ(p)" "BUCKET(b)"))))
+
+#+end_src
+
+Org-mode capture distractions.
+
+#+begin_src emacs-lisp
+
+  (setq org-capture-templates
+            '(("d" "Distraction" entry (file+headline "~/OrgFiles/distractions.org" "Notes")
+             "* %?\n%T")))
+
+#+end_src
+
+Center all text in org-mode.
+
+#+begin_src emacs-lisp
 
      (defun efs/org-mode-visual-fill ()
        (setq visual-fill-column-width 100
@@ -379,15 +396,15 @@ Evil - Extensible VI Layer for Emacs. Basically, we can use Vi(m)'s keybingings 
        :ensure t
        :hook (org-mode . efs/org-mode-visual-fill))
 
-   #+end_src
+#+end_src
    
 Don't create another window when hitting *C-c '*. I use it for editing src blocks in org files.
 
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
      (setq org-src-window-setup 'current-window)
 
-   #+end_src
+#+end_src
 
 Add structures like emacs-lisp.   
 
@@ -401,6 +418,55 @@ Add structures like emacs-lisp.
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp")))
 
 #+end_src
+
+Org-Roam for Zettelkasten.
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    (org-roam-dailies-capture-templates
+          '(("d" "default" entry "* %<%I:%M %p>: %?"
+             :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n#+FILETAGS: :Daily:"))))
+    (org-roam-capture-templates
+     '(("d" "default" plain
+        "%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
+        :unnarrowed t)
+       ("p" "psychology" plain
+        (file "~/RoamNotes/Templates/psychologyTemplate.org")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+FILETAGS: psychology")
+        :unnarrowed t)
+       ("t" "thoughts" plain
+        (file "~/RoamNotes/Templates/thoughtsTemplate.org")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n#+FILETAGS: thoughts")
+        :unnarrowed t)
+       ("i" "index file" plain
+        (file "~/RoamNotes/Templates/indexTemplate.org")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+FILETAGS: :MOC:")
+        :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point)
+           :map org-roam-dailies-map
+           ("Y" . org-roam-dailies-capture-yesterday)
+           ("T" . org-roam-dailies-capture-tomorrow))
+    :bind-keymap
+    ("C-c n d" . org-roam-dailies-map)
+    :config
+    (require 'org-roam-dailies)
+    (org-roam-db-autosync-mode)
+    (org-roam-setup))
+
+  (setq org-roam-node-display-template "${tags:15} ${title:100}")
+
+#+end_src
+
 ** Ivy and counsel
 
 If this doesn't work, try *M-x* /package-install/ *RET* /counsel/ *RET*.
@@ -549,7 +615,11 @@ General
 
        (rune/leader-keys
        "t" '(:ignore t :which-key "toggles")
-       "tt" '(counsel-load-theme :which-key "choose theme")))
+       "tt" '(counsel-load-theme :which-key "choose theme")
+       "o" '(:ignore t :which-key "org-mode")
+       "od" '(org-capture :which-key "add distraction")
+       "ol" '(org-agenda-list :which-key "agenda list")
+       "oA" '(org-agenda :which-key "agenda")))
 
    #+end_src
 
@@ -586,9 +656,68 @@ Auto package updates.
     (auto-package-update-at-time "09:00"))
 
 #+end_src
+** Functions
+
+Always kill current buffer
+
+   #+begin_src emacs-lisp
+
+     (defun kill-cur-buf ()
+       (interactive)
+       (kill-buffer (current-buffer)))
+     (global-set-key (kbd "C-x k") 'kill-cur-buf)
+
+   #+end_src
+
+Config edit
+
+   #+begin_src emacs-lisp
+
+     (defun config-visit ()
+       (interactive)
+       (find-file "~/.emacs.d/config.org"))
+     (global-set-key (kbd "C-c e") 'config-visit)
+
+   #+end_src
+
+Config reload
+
+   #+begin_src emacs-lisp
+
+     (defun config-reload ()
+       (interactive)
+       (org-babel-load-file (expand-file-name "~/.emacs.d/config.org")))
+     (global-set-key (kbd "C-c r") 'config-reload)
+
+   #+end_src
+
+Window splitting
+
+   #+begin_src emacs-lisp
+
+     (defun split-and-follow-horizontally ()
+       (interactive)
+       (split-window-below)
+       (balance-windows)
+       (other-window 1))
+     (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+     (defun split-and-follow-vertically ()
+       (interactive)
+       (split-window-right)
+       (balance-windows)
+       (other-window 1))
+     (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+
+   #+end_src
 
 * TODO Something more
+** Vertico (test)
+#+begin_src emacs-lisp
 
+  (use-package vertico)
+
+#+end_src
 * Programming
 ** Global
 
@@ -750,141 +879,78 @@ Rustic
 
 #+end_src
 ** Web
-Web-mode
-
-#+begin_src emacs-lisp
-
-  (use-package web-mode)
-
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-
-  (defun my-web-mode-hook ()
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-  )
-  (add-hook 'web-mode-hook  'my-web-mode-hook)    
-  (setq tab-width 2)
-
-  (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-current-element-highlight t)
-
-  (defun my-web-mode-hook ()
-    (set (make-local-variable 'company-backends) '(company-css company-web-html company-yasnippet company-files)))
-
-#+end_src
-
-JS2
-
-#+begin_src emacs-lisp
-
-  (use-package js2-mode)
-  (use-package js2-refactor)
-  (use-package xref-js2)
-
-#+end_src
 
 Emmet
 
 #+begin_src emacs-lisp
 
-  (use-package emmet-mode)
+  (use-package emmet-mode
+    :after (html-mode css-mode flycheck rjsx-mode))
 
-  (add-hook 'web-mode-before-auto-complete-hooks
-      '(lambda ()
-       (let ((web-mode-cur-language
-              (web-mode-language-at-pos)))
-                 (if (string= web-mode-cur-language "php")
-             (yas-activate-extra-mode 'php-mode)
-           (yas-deactivate-extra-mode 'php-mode))
-                 (if (string= web-mode-cur-language "css")
-             (setq emmet-use-css-transform t)
-             (setq emmet-use-css-transform nil)))))
-
-  (add-hook 'web-mode-hook  'emmet-mode)
+  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+  (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+  (add-hook 'rjsx-mode-hook 'emmet-mode) ;; enable Emmet in jsx?
 
 #+end_src
 
-Company-web
+Company
 
 #+begin_src emacs-lisp
 
-  (use-package company-web)
-
-  (add-hook 'web-mode-hook (lambda ()
-                            (set (make-local-variable 'company-backends) '(company-web-html))
-                            (company-mode t)))
-
-  (add-hook 'css-mode-hook (lambda ()
-                             (set (make-local-variable 'company-backends) '(company-css))
-                             (company-mode t)))
+  (add-hook 'css-mode-hook 'company-mode)
+  (add-hook 'rjsx-mode-hook 'company-mode)
 
 #+end_src
 
-Web-beautify
+Tidy
 
 #+begin_src emacs-lisp
 
-  (use-package web-beautify)
+  (use-package format-all
+    :after (rjsx-mode html-mode flycheck))
 
-  (eval-after-load 'js2-mode
-    '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-  (eval-after-load 'js
-    '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
-
-  (eval-after-load 'json-mode
-    '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
-
-  (eval-after-load 'sgml-mode
-    '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
-
-  (eval-after-load 'web-mode
-    '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
-
-  (eval-after-load 'css-mode
-    '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+  (add-hook 'prog-mode-hook 'format-all-mode)
 
 #+end_src
 
-This for auto formatting before saving.
+RJSX mode
 
 #+begin_src emacs-lisp
 
-  (eval-after-load 'js2-mode
-    '(add-hook 'js2-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-
-  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-  (eval-after-load 'js
-    '(add-hook 'js-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-
-  (eval-after-load 'json-mode
-    '(add-hook 'json-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-
-  (eval-after-load 'sgml-mode
-    '(add-hook 'html-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
-
-  (eval-after-load 'web-mode
-    '(add-hook 'web-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
-
-  (eval-after-load 'css-mode
-    '(add-hook 'css-mode-hook
-               (lambda ()
-                 (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
+  (use-package rjsx-mode
+    :ensure t
+    :mode "\\.js\\'")
 
 #+end_src
+
+Tide
+
+#+begin_src emacs-lisp
+
+  (defun setup-tide-mode()
+    "Setup function for tide."
+    (interactice)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+
+  (use-package tide
+    :ensure t
+    :after (rjsx-mode company flycheck)
+    :hook (rjsx-mode . setup-tide-mode))
+
+#+end_src
+
+Prettier
+
+#+begin_src emacs-lisp
+
+  (use-package prettier-js
+    :ensure t
+    :after (rjsx-mode)
+    :hook (rjsx-mode . prettier-js-mode))
 
 #+end_src
 

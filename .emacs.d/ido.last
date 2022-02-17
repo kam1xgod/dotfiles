@@ -1,0 +1,66 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/usr/local/" . "etc/")
+ ("/usr/" . "local/")
+ ("/home/kami/.config/" . "kitty/")
+ ("/home/kami/" . ".emacs.d/")
+ ("/" . "etc/")
+ ("/home/" . "kami/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/kami/.emacs.d/"
+ "/etc/"
+ "/home/kami/.config/kitty/"
+ "/home/kami/.config/waybar/"
+ "/home/kami/.config/sway/"
+ "/usr/local/etc/"
+ "/home/kami/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "config.org"
+ "init.el"
+ "pacman.conf"
+ "kitty.conf"
+ "config"
+ "style.css"
+ "config2"
+ "spotify.py"
+ "spotify.sh"
+ "proxifier.conf"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/kami/" (25063 49858 306971 734000) ".lesshst" ".gtkrc-2.0" ".nuget/" ".dotnet/" ".mysql_history" ".zshrc" ".gitconfig" ".viminfo" ".netrc" ".yarn/" ".yarnrc" "C_CODE.TXT" "FORTRAN-CODE.TXT" ".zcompdump-bugmachine-5.8" ".var/" ".zsh_history" "rmlint.json" ".p10k.zsh" ".p10k.zsh~" ".zshrc~" "TUTORIAL" "TUTORIAL~" "foo" ".shell.pre-oh-my-zsh" ".zshrc.pre-oh-my-zsh" ".oh-my-zsh/" ".vim/" ".histfile" ".zcompdump" "repos/" ".zshenv" ".profile" ".shutter/" ".npm/" "java_error_in_idea_5667.log" ".emacs.d/" ".m2/" "IdeaProjects/" ".android/" ".java/" "snap/" "Insync/" ".pki/" ".vscode/" ".gnupg/" ".mozilla/" ".bash_history" ".cargo/" ".rustup/" "paru/" ".icons/" ".kde4/" ".cache/" ".local/" ".config/" "Videos/" "Pictures/" "Music/" "Documents/" "Public/" "Templates/" "Downloads/" "Desktop/" ".bashrc" ".bash_profile" ".bash_logout" "../" "./")
+
+ ("/home/kami/.emacs.d/" (25061 24479 405988 815000) "init.el" "init.el~" "config.el" "ido.last" "ido.last~" "config.org" "config.org~" "recentf" "recentf~" "transient/" "network-security.data" "projectile-bookmarks.eld" "#recentf#" "smex-items" "tramp" "elpa/" "auto-save-list/" "../" "./")
+
+ ("/home/kami/.config/" (25060 37469 178635 488000) "kxkbrc" "bluedevilglobalrc" "ksmserverrc" "arkrc" "dolphinrc" "systemsettingsrc" "kdeglobals" "kglobalshortcutsrc" "khotkeysrc" "mimeapps.list" "autostart-scripts/" "Trolltech.conf" "gtkrc-2.0" "gtkrc" "kwinrc" "katemetainfos" "katerc" "kritadisplayrc" "kritarc" "QtProject.conf" "vivaldi/" "plasma-org.kde.plasma.desktop-appletsrc" "spectaclerc" "blender/" "screenkey.json" "kconf_updaterc" "Microsoft Teams - Preview/" "soffice.binrc" "emaildefaults" "kate/" "xdg-desktop-portal-kderc" "BraveSoftware/" "libreoffice/" "pavucontrol.ini" "keditfiletyperc" "wofi/" "trashrc" "plasmashellrc" "waybar/" "sway/" "kcminputrc" "plasmarc" "drkonqirc" "plasma-localerc" "kscreenlockerrc" "katevirc" "neofetch/" "powermanagementprofilesrc" "gdlauncher_next/" "gdlauncher/" "flameshot/" "plasmanotifyrc" "teams/" "Microsoft/" "kded5rc" "JetBrains/" "KDE/" "GDLauncher/" "lattedockrc" "latte/" "kactivitymanagerd-statsrc" "discord/" "spotify/" "Code/" "autostart/" "Insync/" "konsolerc" "htop/" "session/" "ktimezonedrc" "kitty/" "fontconfig/" "sddmthemeinstallerrc" "discoverrc" "baloofileinformationrc" "kwalletrc" "kdedefaults/" "kwinrulesrc" "krunnerrc" "pulse/" "kateschemarc" "akregatorrc" "kmixrc" "libaccounts-glib/" "kactivitymanagerdrc" "powerdevilrc" "kde.org/" "baloofilerc" "xsettingsd/" "gtk-4.0/" "gtk-3.0/" "dconf/" "user-dirs.locale" "user-dirs.dirs" "../" "./")
+
+ ("/etc/" (25052 24623 13284 634000) "ld.so.cache" "OpenCL/" "bash.bashrc" "bash.bash_logout" "resolv.conf" ".updated" "dpkg/" "alternatives/" "asciidoc/" "xml/" "pacman.conf" "makepkg.conf" "my.cnf.d/" "my.cnf" "appstream.conf" "libreoffice/" "locale.gen" "locale.gen~" "openmpi/" "sddm.conf" "man_db.conf" "i3status.conf" "sway/" "mke2fs.conf" "e2scrub.conf" "shadow" "passwd" "gshadow" "group" "shadow-" "passwd-" "gshadow-" "group-" "geoclue/" "passwd.OLD" "webapps/" "php/" "httpd/" "java-openjdk/" "dbus-1/" "apparmor.d/" "apparmor/" "paru.conf" "zsh/" "localtime" "sddm.conf.d/" "snapper/" "logrotate.d/" "cron.hourly/" "cron.daily/" "nginx/" "mime.types" "mailcap" "gtk-3.0/" "sudoers" "vconsole.conf" "ModemManager/" "ppp/" "opt/" "chromium/" "signond.conf" "fuse.conf" "cifs-utils/" "dconf/" "rc_maps.cfg" "rc_keymaps/" "vdpau_wrapper.cfg" "jack/" "gdb/" "udisks2/" "libblockdev/" "ndctl.conf.d/" "ndctl/" "daxctl.conf.d/" "mdadm.conf" "lvm/" "UPower/" "bluetooth/" "ts.conf" "fonts/" "libva.conf" "libinput/" "smartd.conf" "wgetrc" "ssh/" "trusted-key.key" "vimrc" "nanorc" "sensors3.conf" "sensors.d/" "healthd.conf" "conf.d/" "avahi/" "pulse/" "alsa/" "polkit-1/" "NetworkManager/" "slsh.rc" "wpa_supplicant/" "grub.d/" "locale.conf" "hostname" "os-release" "mkinitcpio.d/" "mkinitcpio.conf" "initcpio/" "sudoers.d/" "sudo_logsrvd.conf" "sudo.conf" "iproute2/" ".pwd.lock" "machine-id" "xdg/" "udev/" "tmpfiles.d/" "sysctl.d/" "modules-load.d/" "kernel/" "binfmt.d/" "X11/" "iptables/" "ethertypes" "libnl/" "pinentry/" "ca-certificates/" "systemd/" "pkcs11/" "login.defs" "default/" "modprobe.d/" "depmod.d/" "security/" "environment" "libaudit.conf" "audit/" "pam.d/" "netconfig" "bindresvport.blacklist" "krb5.conf" "request-key.d/" "request-key.conf" "keyutils/" "openldap/" "ssl/" "xattr.conf" "inputrc" "rpc" "nscd.conf" "gai.conf" "skel/" "shells" "securetty" "profile.d/" "profile" "nsswitch.conf" "mtab" "ld.so.conf.d/" "ld.so.conf" "issue" "hosts" "host.conf" "fstab" "crypttab" "arch-release" "services" "protocols" "pacman.d/" "../" "./")
+
+ ("/home/kami/.config/kitty/" (25045 55336 2351 145000) "kitty.conf" "kitty.conf~" "../" "./")
+
+ ("/home/kami/.config/sway/" (25050 61432 398230 415000) "config" "config~" "../" "./")
+
+ ("/home/kami/.config/waybar/" (25050 62627 529228 206000) "#style.css#" "config2~" ".#style.css" "style.css" "style.css~" "spotify.py" "spotify.sh" "spotify.sh~" "config" "config~" "../" "./")
+
+ ("/usr/local/etc/" (25050 56830 583666 561000) "proxifier.conf" "proxifier.conf~" "../" "./")
+
+ ("/var/" (25050 53601 168411 450000) ".updated" "snap/" "db/" "tmp/" "spool/" "run/" "opt/" "mail/" "lock/" "local/" "games/" "empty/" "log/" "lib/" "cache/" "../" "./")
+
+ ("/usr/local/" (25033 51541 481705 106000) "src/" "share/" "sbin/" "man/" "lib/" "include/" "games/" "etc/" "bin/" "../" "./")
+
+ ("/usr/" (25049 52558 745185 48000) "lib32/" "src/" "sbin/" "local/" "lib64/" "lib/" "include/" "bin/" "share/" "../" "./")
+
+ ("/home/" (25033 53393 98377 109000) "kami/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

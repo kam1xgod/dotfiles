@@ -1,0 +1,2 @@
+;;; Generated package description from clippy.el  -*- no-byte-compile: t -*-
+(define-package "clippy" "20161028.1954" "Show tooltip with function documentation at point" '((pos-tip "1.0")) :commit "e77f6b63e54d74e243be98accad474e38f7e2a86" :authors '(("Matus Goljer" . "matus.goljer@gmail.com")) :maintainer '("Matus Goljer" . "matus.goljer@gmail.com") :keywords '("docs") :url "https://github.com/Fuco1/clippy.el")

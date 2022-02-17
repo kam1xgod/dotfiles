@@ -1,0 +1,70 @@
+
+;; ----- smex-history -----
+(
+ bookmark-bmenu-list
+ bookmark-menu
+ bookmark-save
+ format-all-buffer
+ org-agenda-list
+ customize-variable
+ org-habit-toggle-display-in-agenda
+)
+
+;; ----- smex-data -----
+(
+ (package-install . 5)
+ (list-packages . 10)
+ (eval-buffer . 37)
+ (check-parens . 7)
+ (dashboard-mode . 4)
+ (package-autoremove . 3)
+ (rustic-mode . 2)
+ (cargo-process-run . 2)
+ (lsp-mode . 1)
+ (customize-group . 1)
+ (lsp-ui-doc-mode . 1)
+ (lsp-rust-switch-server . 1)
+ (cargo-process-new . 6)
+ (company-web-html . 4)
+ (company-abort . 1)
+ (make-directory . 19)
+ (flycheck-select-checker . 20)
+ (flycheck-verify-checker . 7)
+ (cargo-process-check . 1)
+ (flycheck-rust-setup . 1)
+ (cargo-process-clippy . 2)
+ (rustic-cargo-clippy . 2)
+ (rustic-cargo-clippy-fix . 2)
+ (rustic-flycheck-setup . 1)
+ (web-beautify-html . 2)
+ (web-beautify-css . 4)
+ (css-mode . 3)
+ (company-css . 6)
+ (web-mode . 4)
+ (company-diag . 4)
+ (company-mode . 8)
+ (javascript-mode . 3)
+ (js-mode . 1)
+ (emacs-lisp-mode . 1)
+ (emmet-mode . 7)
+ (rename-file . 2)
+ (org-mode-restart . 1)
+ (center-line . 5)
+ (revert-buffer . 13)
+ (dashboard-return . 2)
+ (prettier-js-mode . 1)
+ (org-schedule . 1)
+ (org-roam-node-open . 1)
+ (projectile-dired . 1)
+ (projectile-find-file . 1)
+ (org-roam-tag-add . 5)
+ (vertico-mode . 3)
+ (org-roam-db-sync . 4)
+ (customize-variable . 2)
+ (org-habit-toggle-display-in-agenda . 4)
+ (org-agenda-list . 1)
+ (format-all-buffer . 1)
+ (bookmark-save . 1)
+ (bookmark-menu . 1)
+ (bookmark-bmenu-list . 1)
+)

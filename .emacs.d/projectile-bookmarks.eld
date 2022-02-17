@@ -1,0 +1,1 @@
+("~/repos/dotfiles/" "~/repos/learning_web_dev/" "~/repos/songsLibrary/" "~/repos/onlineDealer/" "~/repos/is_that_a_site_portfolio/" "~/repos/onlineDealer/react-frontend/" "~/repos/onlineDealer/java-backend/" "~/repos/WindowsAndLinuxFileManager/" "~/repos/stupid_boy_learning_rust/")

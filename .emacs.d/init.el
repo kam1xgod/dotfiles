@@ -27,11 +27,6 @@
 ;;; probably, also it will show how much time loading of packages took.
 (setq use-package-verbose t)
 
-;;; spacemacs theme. making sure it's installed now.
-(unless (package-installed-p 'spacemacs-theme)
-  (package-refresh-contents)
-  (package-install 'spacemacs-theme))
-
 ;;; font configuration
 
 (set-face-attribute 'default nil :font "Source Code Pro" :height 100)
@@ -54,9 +49,9 @@
  '(auth-source-save-behavior nil)
  '(custom-enabled-themes '(doom-palenight))
  '(custom-safe-themes
-   '("47db50ff66e35d3a440485357fb6acb767c100e135ccdf459060407f8baea7b2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+   '("c4063322b5011829f7fdd7509979b5823e8eea2abf1fe5572ec4b7af1dd78519" "47db50ff66e35d3a440485357fb6acb767c100e135ccdf459060407f8baea7b2" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   '(company-css rustic-clippy rust-clippy clippy-rust clippy web-beautify company-web-html xref-js2 js2-refactor js2-mode web-mode company-web emmet-mode auto-package-update yasnippet rustic lsp-clients company-lsp cargo rust-mode toml-mode lsp-ui lsp-mode company flycheck-rust flycheck visual-fill-column evil-magit magit counsel-projectile projectile hydra evil-collection evil general doom-themes helpful ivy-rich counsel doom-modeline diminish spaceline dashboard rainbow-delimiters sudo-edit hungry-delete switch-window rainbow-mode avy smex ido-vertical-mode beacon spacemacs-theme which-key use-package)))
+   '(vertico org-roam format-all tide rjsx-mode eslint javascript-eslint prettier-js add-node-modules-path prettier-js-mode company-css rustic-clippy rust-clippy clippy-rust clippy web-beautify company-web-html xref-js2 js2-refactor js2-mode web-mode company-web emmet-mode auto-package-update yasnippet rustic lsp-clients company-lsp cargo rust-mode toml-mode lsp-ui lsp-mode company flycheck-rust flycheck visual-fill-column evil-magit magit counsel-projectile projectile hydra evil-collection evil general doom-themes helpful ivy-rich counsel doom-modeline diminish spaceline dashboard rainbow-delimiters sudo-edit hungry-delete switch-window rainbow-mode avy smex ido-vertical-mode beacon spacemacs-theme which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
