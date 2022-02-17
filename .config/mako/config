@@ -1,0 +1,10 @@
+font=Ioveska 13
+background-color=#332E41BF
+text-color=#B1E3AD
+border-size=1
+border-color=#B1E3AD
+border-radius=5
+icons=1
+default-timeout=10000
+progress-color=over #B1E3AD
+group-by=app-name

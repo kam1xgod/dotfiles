@@ -7,8 +7,10 @@ set $up k
 set $right l
 set $term kitty
 set $menu wofi --show run
+set $eww_open ~/eww/eww/target/release/eww open-many weather profile quote search_full incognito-icon vpn-icon home_dir screenshot power_full reboot_full lock_full logout_full suspend_full
+set $eww_close ~/eww/eww/target/release/eww close-all
 # set $wifi 
-set $background '~/Insync/wtfomgohohoh@gmail.com/Google Drive/wallpapers/eva.jpg'
+set $background '~/Pictures/wallpapers/yuki.png'
 
 ### Output configuration
 output * bg $background fill
@@ -119,6 +121,10 @@ assign [class="discord"] 8
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
+    #Eww
+    bindsym --to-code $mod+p exec $eww_open
+    bindsym --to-code $mod+Shift+p exec $eww_close
+
 #
 # Moving around:
 #
@@ -191,7 +197,7 @@ assign [class="discord"] 8
 	exec swaymsg "workspace 3; exec kitty;"
 	exec mako # notifications.
 	exec emacs --daemon #idk if it will work, but I believe this will start emacs daemon whenever system is started. 
-	exec sudo systemctl restart proxifier.service # need it 'cuz of my stupid university rules.
+	exec ~/eww/eww/target/release/eww daemon
 
 	# brightness, cuz my laptop have some troubles with it.
 	exec brightnessctl set 50%
@@ -262,9 +268,9 @@ bindsym --to-code $mod+r mode "resize"
     #
     set $mode_system System: (s) suspend, (r) reboot, (S) shutdown
     mode "$mode_system" {
-	     bindsym --to-code s exec --no-startup-id systemctl suspend, mode "default"
-	     bindsym --to-code r exec --no-startup-id systemct reboot, mode "default"
-	     bindsym --to-code Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+	     bindsym --to-code s exec systemctl suspend, mode "default"
+	     bindsym --to-code r exec systemct reboot, mode "default"
+	     bindsym --to-code Shift+s exec systemctl poweroff -i, mode "default"
 
 	     # return to default mode
 	     bindsym Return mode "default"
